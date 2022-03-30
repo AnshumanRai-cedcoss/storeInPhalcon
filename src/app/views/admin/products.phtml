@@ -1,0 +1,110 @@
+<?php include('header.phtml'); ?>
+<div class="container-fluid">
+    <div class="row">
+      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+        <div class="position-sticky pt-3">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <?php echo $this->tag->linkTo([
+                "admin",
+                "Dashboard",
+                "class" => "nav-link"
+                ]
+              );?>           
+             </li>
+            <li class="nav-item">
+            <?php echo $this->tag->linkTo([
+                "admin/orders",
+                "Orders",
+                "class" => "nav-link"
+                ]
+              );?>  
+            </li>
+            <li class="nav-item">
+            <?php echo $this->tag->linkTo([
+                "admin/products",
+                "Products",
+                "class" => "nav-link"
+                ]
+              );?>  
+            </li>
+          </ul>
+        </div> 
+      </nav>
+
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center
+         pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Dashboard</h1>
+        </div>
+
+        <h2>Users</h2>
+        <div class="table-responsive">
+       <table class="table table-striped table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">Product id</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Product Details</th>
+                    <th scope="col">Product sale price</th>
+                    <th scope="col">Product list price</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">DELETE</th>
+                  </tr>
+                </thead>
+                <tbody>
+          
+           <?php 
+            foreach ($products as $k => $v){
+              ?>
+                  <tr>
+                        <td> <?php echo $v->product_id  ?></td>
+                        <td> <?php echo $v->product_name  ?></td>
+                        <td> <?php echo $v->product_details  ?></td>
+                        <td> <?php echo $v->product_sale_price ?></td>
+                        <td> <?php echo $v->product_list_price  ?></td>
+                        <td> <?php echo $v->product_image  ?></td>
+                        <td> 
+             <?php echo $this->tag->form("admin/edit");
+              echo  $this->tag->hiddenField(
+                [
+                    "chId",
+                    "value" => $v->product_id
+                ]);
+              echo $this->tag->submitButton(["Edit", "class" => "btn btn-primary"]);?>
+              </td>
+              </form>
+              <td>  
+              <?php echo $this->tag->form("admin/delete");
+              echo  $this->tag->hiddenField(
+                [
+                    "delId",
+                    "value" => $v->product_id
+                ]);
+                echo  $this->tag->hiddenField(
+                    [
+                        "action",
+                        "value" => "Products"
+                    ]);
+                   echo $this->tag->submitButton(
+                  ["Delete", "class" => "btn btn-danger" , "id"=>"delete"]
+             ); ?> </form> </td></tr> <?php          
+            }
+            ?>  
+          </tbody>
+       </table>      
+      </div>
+
+
+         <?php echo $this->tag->form("admin/addProduct"); ?>
+         <div class="form-floating">
+         <?php echo $this->tag->submitButton(["Add New Product", "class" => "btn btn-lg btn-primary"]); ?>
+         </div>
+         </form>
+
+
+      </main>
+    </div>
+  </div>
+</body>

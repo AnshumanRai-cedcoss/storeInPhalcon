@@ -1,0 +1,55 @@
+<?php
+?>
+<!doctype html>
+<html lang="en">
+  <body class="text-center">
+  <main class="form-signup " style="padding-left:35%;padding-right:35%;">
+ 
+  <?php echo $this->tag->form(""); ?>
+  <h1 class="h3 mb-3 fw-normal">Sign Up</h1>
+
+   <div class="form-floating">
+       <?php echo $this->tag->textField(["user_name","class"=>"form-control","required" => "true"]); ?>
+       <label for="name">User Name</label>
+      </div>
+  
+   <div class="form-floating">
+        <?php echo $this->tag->textField(["first_name","class"=>"form-control","required" => "true"]); ?>
+        <label for="firstname">First Name</label>
+    </div>
+
+   <div class="form-floating">
+        <?php echo $this->tag->textField(["last_name","class"=>"form-control","required" => "true"]); ?>
+        <label for="lastname">Last Name</label>
+    </div>
+   <div class="form-floating">
+        <?php echo $this->tag->emailField(["email","class"=>"form-control","required" => "true"]); ?>
+        <label for="email">E-Mail</label>
+    </div>
+
+   <div class="form-floating">
+        <?php echo $this->tag->passwordField(["password","class"=>"form-control","required" => "true"]); ?>
+        <label for="password">Password</label>
+    </div>
+
+   <div class="form-floating">
+        <?php echo $this->tag->passwordField(["rpass","class"=>"form-control","required" => "true"]); ?>
+        <label for="rpass">Re-type New Password</label>
+    </div>
+   <div class="form-floating">
+        <?php echo $this->tag->submitButton(
+    ["Register", "class" => "w-100 btn btn-lg btn-primary"]
+); ?>
+    </div>
+</form>
+<div <?php if(isset($success)) { if($success) 
+{ 
+    echo "class='text-success'";
+} else {
+    echo "class='text-danger'";
+}
+}?> >
+<p><?php if(isset($message)) echo $message ; ?> </p>    </div>
+</main>  
+  </body>
+</html>

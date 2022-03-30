@@ -1,0 +1,137 @@
+<?php
+
+include 'header.phtml'?>
+<main>
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">My Shop</h1>
+        <p class="lead text-muted">Something short and leading about the collection below—its 
+          contents, the creator, etc. Make it short and sweet, but not too short so folks dont 
+          simply skip over it entirely.</p>
+        <p>
+                <?php echo $this->tag->linkTo([
+                'user/userdash',
+                'Dashboard',
+                'class' => 'btn btn-primary my-2']);?> 
+          <?php echo $this->tag->linkTo([
+                '#',
+                'Login',
+                'class' => 'btn btn-secondary my-2']);?> 
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+      <div class="container overflow-hidden">
+        <form class="row row-cols-lg-auto align-items-center mt-0 mb-3" method="POST">
+            <div class="col-lg-6 col-12">
+              <label class="visually-hidden" for="inlineForm">Search</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="inlineForm" name="searchInput" 
+                placeholder="Product, SKU, Category">
+              </div>
+            </div>
+          
+            <div class="col-lg-3 col-12">
+              <label class="visually-hidden" for="inlineFormSelectPref">Sort By</label>
+              <select class="form-select" name="filter" id="inlineFormSelectPref">
+                <option selected value="">Sort By</option>
+                <option value="product_sale_price">Price</option>
+                <option value="2">Recently Added</option>
+              </select>
+            </div>
+          
+            <div class="col-lg-3 col-12">
+              <button type="submit" name="inputBtn" class="btn btn-primary w-100">Search</button>
+            </div>
+          </form>
+      </div>
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <?php
+             
+                    $html="";
+                    foreach ($products as $k => $v) {
+
+                     // echo Phalcon\Tag::image("../../../public/images/'.$v->product_image");
+                        ?>  <div class="col">
+                            <div class="card shadow-sm">
+                            <img src="../../../public/images/<?php echo $v->product_image ?>" alt="" width="90%" 
+                            height="300px">
+                  
+                            <div class="card-body">
+                                <h5><?php echo $v->product_name ?></h5>
+                              <p class="card-text">Product ID :<?php echo $v->product_id ?></p>
+                              <div class="d-flex justify-content-between align-items-center">
+                                <p><strong><?php echo $v->product_list_price ?></strong>&nbsp;<del>
+                                  <small class="link-danger"><?php echo $v->product_sale_price ?></small></del></p>
+                                  <?php echo $this->tag->form(["products/addCart"]);?>
+                                 <?php echo $this->tag->hiddenField(
+                                  [
+                                    "id",
+                                    "value" => $v->product_id
+                                    ]);?>
+                                <?php echo $this->tag->submitButton(
+                                  [
+                                    "name" => "cartBtn",
+                                    "class" => "btn btn-success" ,
+                                    "value" => "Add to Cart"
+                                  ]); ?>
+                                </form> 
+                               
+                         
+                                <?php echo $this->tag->form(["products/viewDetail"]);?>
+                                 <?php echo $this->tag->hiddenField(
+                                  [
+                                    "id",
+                                    "value" => $v->product_id
+                                    ]);?>
+                                <?php echo $this->tag->submitButton(
+                                  [
+                                    "info",
+                                    "class" => "btn btn-primary" ,
+                                    "value" => "View Details"
+                                  ]); ?>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                  <?php 
+                    }   
+                ?>
+</div>
+<br>
+<div class="text-center">
+    <?php if(isset($this->session->cart) && count($this->session->cart) > 0)
+    {
+          echo $this->tag->linkTo(
+            [
+              "products/addCart",
+              "Items in your Cart",
+              "class" => "btn btn-success"
+            ]
+          );
+    }?>           
+     </div> 
+    </div>
+  </div>
+
+</main>
+
+<footer class="text-muted py-5">
+  <div class="container">
+    <p class="float-end mb-1">
+      <a href="#">Back to top</a>
+    </p>
+    <p class="mb-1">&copy; CEDCOSS Technologies</p>
+  </div>
+</footer>
+
+
+    <script src="../node_modules//bootstrap//dist//js//bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="../assets/js/cart.js"></script>  
+

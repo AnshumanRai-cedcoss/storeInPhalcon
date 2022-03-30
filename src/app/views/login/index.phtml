@@ -1,0 +1,35 @@
+
+<!doctype html>
+<html lang="en">
+
+  <body class="text-center">
+  <main class="form-signup " style="padding-left:35%;padding-right:35%;">
+ 
+  <?php echo $this->tag->form(""); ?>
+  <h1 class="h3 mb-3 fw-normal">Login Please</h1>
+
+   <div class="form-floating">
+       <?php echo $this->tag->textField(["input1","class"=>"form-control","required" => "true"]); ?>
+       <label for="name">User Name or Email</label>
+      </div>
+  
+   <div class="form-floating">
+        <?php echo $this->tag->passwordField(["password","class"=>"form-control","required" => "true"]); ?>
+        <label for="firstname">Password</label>
+    </div>
+   <div class="form-floating py-2">
+  
+     <p> <?php echo $this->tag->checkField(["remember"]) ;?> </p>
+     <p> <label for="remember">Remember Me</label>  </p>
+    
+  </div>
+   <div class="form-floating">
+        <?php echo $this->tag->submitButton(
+    ["Login", "class" => "w-100 btn btn-lg btn-primary"]
+); ?>
+  <p class  = "text-danger"><?php echo $message;?></p>
+    </div>
+</form>
+</main>  
+  </body>
+</html>

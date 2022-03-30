@@ -1,0 +1,118 @@
+
+<body class="bg-light">
+  <div class="container">
+    <main>
+      <div class="py-5 text-center">
+        <h2>Cart</h2>
+      </div>
+
+      <div class="row g-5">
+        <div class="col order-md-last">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-primary">Your Cart</span>
+            <span class="badge bg-primary rounded-pill"></span>
+          </h4>
+            <table class="table">
+                <tr>
+                   <th>Product</th>
+                   <th>Price</th>
+                   <th>Qty</th>
+                   <th>DELETE</th>
+                   <th>Total</th>
+                </tr>
+                <?php
+                $gtotal = 0;
+                foreach ($cart as $k => $v) {
+                    $tPrice = 0;
+                    $tPrice = $v["quantity"] * $v["price"]; ?>
+                       <tr>
+                                  <td><?php echo  $v["name"] ?></td>
+                                  <td><?php echo  $v["price"] ?></td>
+                                  <td>
+                                      <?php echo $this->tag->form("") ;
+                                        echo $this->tag->numericField([
+                                              "quantity",
+                                              "value" => $v["quantity"]
+                                         ]);
+                                         echo $this->tag->hiddenField(
+                                          [
+                                            "upKey",
+                                            "value" => $k
+                                          ]
+                                        );
+                                         echo $this->tag->submitButton([
+                                          "name" => "UpdateCart",
+                                          "value" => "Update",
+                                          "class" => "btn btn-success ms-1"
+                                     ]);
+                                         ?>
+                                       </form>   
+                                  </td>
+                                  <td>
+                                  <?php echo $this->tag->form("") ?>
+                                  <?php echo $this->tag->hiddenField(
+                                        [
+                                          "delKey",
+                                          "value" => $k
+                                        ]
+                                      );
+                                    echo $this->tag->submitButton(
+                                      [
+                                         "name" => "deleteCart",
+                                        "value" => "Delete",
+                                        "class" => "btn btn-danger ms-1 w-20"
+                                      ]
+                                    );
+                                      ?>  
+                                      </form>      
+                                 </td>
+                    
+                                 <td>$<?php echo $tPrice ?></td>
+                               </tr>
+                              <?php  $gtotal += $tPrice ;
+                } ?>
+                 </table>
+    <h3>Grand Total : <?php echo " ".$gtotal?></h3>
+        </div>
+      </div>
+      <div class="row g-5 align-items-right">
+        <div class="col-3">
+          <?php echo $this->tag->linkTo(
+            [
+              "products/checkout",
+              "Checkout",
+              "class" => "btn btn-primary my-1"
+            ]
+            ); ?>
+        </div>
+      </div>
+      <div class="row g-5 align-items-right">
+        <div class="col-3">
+         
+          <?php echo $this->tag->linkTo(
+            [
+              "products",
+              "Go back",
+              "class" => "btn btn-danger"
+            ]
+          )  ?>
+        </div>
+      </div>
+    </main>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+      <p class="mb-1">&copy; 2017–2021 Company Name</p>
+      <ul class="list-inline">
+        <li class="list-inline-item"><a href="#">Privacy</a></li>
+        <li class="list-inline-item"><a href="#">Terms</a></li>
+        <li class="list-inline-item"><a href="#">Support</a></li>
+      </ul>
+    </footer>
+  </div>
+
+
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="../assets/js/cart.js"></script>
+  <script src="./assets/js/form-validation.js"></script>
+</body>

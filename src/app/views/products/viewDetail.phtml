@@ -1,0 +1,60 @@
+
+<?php include('header.phtml') ;?>
+        
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                 
+                <h1 class="display-5 fw-bolder"> <?php echo $product->product_name ?></h1>
+
+                    <div class="col-md-6">
+                    <img class="card-img-top mb-5 mb-md-0" src="../../../public/images/<?php echo $product->product_image ?>" alt="..." >
+                    </div>
+                    <div class="col-md-6">
+                        
+                        
+                        <div class="small mb-1"><h3>SKU: <?php echo $product->product_id ?> </h3></div>
+                        
+                        <div class="fs-5 mb-5">
+                            <span class="text-decoration-line-through text-secondary">$<?php echo($product->product_list_price); ?></span>
+                            <span class= "text-danger"><strong><?php echo " $".$product->product_sale_price ?></strong></span>
+                        </div>
+                        <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                           Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati 
+                           excepturi alias magni, accusamus eius blanditiis delectus ipsam minima 
+                           a iste laborum vero?</p>
+
+                           <div class="fs-5 mb-5">
+                            <h3 class="" >Product Details</h3>
+                            <p><?php echo $product->product_details ?></p>
+                           </div>
+
+                           <div class="d-flex">
+                          
+                           <?php echo $this->tag->form(["products/addCart"]);?>
+                                 <?php echo $this->tag->hiddenField(
+                                  [
+                                    "id",
+                                    "value" => $product->product_id
+                                    ]);?>
+                                <?php echo $this->tag->submitButton(
+                                  [
+                                    "name" => "cartBtn",
+                                    "class" => "btn btn-success" ,
+                                    "value" => "Add to Cart"
+                                  ]); ?>
+                                </form> 
+  
+                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    
+        <!-- Related items section-->
+
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">&copy; CEDCOSS Technologies</p></div>
+        </footer>
+       
+  

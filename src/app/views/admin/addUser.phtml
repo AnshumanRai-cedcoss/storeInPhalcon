@@ -1,0 +1,61 @@
+<main class="form-signup " style="padding-left:35%;padding-right:35%;">
+<div class="text-center py-2">
+ 
+  <?php echo $this->tag->form("admin/addUser"); ?>
+  <h1 class="h3 mb-3 fw-normal">Add New User</h1>
+
+
+  <div class="form-floating">
+       <?php echo $this->tag->textField(["user_name","class"=>"form-control","required" => "true"]); ?>
+       <label class="form-label" for="name">User Name</label>
+      </div>
+  
+   <div class="form-floating">
+        <?php echo $this->tag->textField(["first_name","class"=>"form-control","required" => "true"]); ?>
+        <label class="form-label" for="firstname">First Name</label>
+    </div>
+
+   <div class="form-floating">
+        <?php echo $this->tag->textField(["last_name","class"=>"form-control","required" => "true"]); ?>
+        <label class="form-label" for="lastname">Last Name</label>
+    </div>
+   <div class="form-floating">
+        <?php echo $this->tag->emailField(["email","class"=>"form-control","required" => "true"]); ?>
+        <label class="form-label" for="email">E-Mail</label>
+    </div>
+
+   <div class="form-floating">
+        <?php echo $this->tag->passwordField(["password","class"=>"form-control","required" => "true"]); ?>
+        <label class="form-label" for="password">Password</label>
+    </div>
+
+   <div class="form-floating">
+        <?php echo $this->tag->passwordField(["rpass","class"=>"form-control","required" => "true"]); ?>
+        <label class="form-label" for="rpass">Re-type New Password</label>
+    </div>
+   <div class="form-floating">
+        <?php echo $this->tag->submitButton(
+    ["Register", "class" => "w-100 btn btn-lg btn-primary"]
+); ?>
+    </div> <br>
+    <?php echo $this->tag->linkTo(
+    [
+    "admin",
+    "Go Back",
+    "class" => "btn btn-success"
+    ]
+);?>
+</form>
+<div <?php 
+if(isset($success))
+{
+if($success) 
+{ 
+    echo "class='text-success'";
+} else {
+    echo "class='text-danger'";
+}
+}?> >
+<p><?php if(isset($message)) echo $message ;?> </p>  
+</div>
+</main>

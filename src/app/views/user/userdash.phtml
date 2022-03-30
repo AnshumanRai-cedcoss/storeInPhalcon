@@ -1,0 +1,131 @@
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+          <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+           <div class="position-sticky pt-3">
+            <ul class="nav flex-column">
+            <li class="nav-item">
+              <?php echo $this->tag->linkTo(
+                  [
+                    "",
+                    "Profile",
+                    "class" => "nav-link active"
+                  ]
+                  );
+                   ?>
+            </li>
+            <li class="nav-item">
+            <?php echo $this->tag->linkTo(
+                  [
+                    "user/orders",
+                    "My Orders",
+                    "class" => "nav-link "
+                  ]
+                  );
+                   ?>
+            </li>
+            <li class="nav-item">
+            <?php echo $this->tag->linkTo(
+                  [
+                    "products",
+                    "Go for shopping",
+                    "class" => "nav-link "
+                  ]
+                  );
+                   ?>
+          </li> 
+          </ul>
+           </div>
+        </nav>
+    <div class="col">
+    <h1 class="text-primary p-5">Hello <?php echo $user->first_name ?></h1>
+    <div class="row">
+        <div class="col-lg-4">
+            <label for="email" class="p-5">
+                <h4>Username:</h4>
+                <h5 class="text-danger"><?php echo $user->user_name ?></h5</label>
+        </div>
+    </div>
+    <h5 class="text-success p-5">Edit Your profile</h5>
+    <div class="container mt-3">
+            <?php echo $this->tag->form("user/edit"); ?>
+            <div class="row">
+                <div class="col-lg-3">
+                    <label for="first_name"> <b>Your First Name:</b> </label>
+                </div>
+                <div class="col-lg-3">
+                     <?php echo $this->tag->textField(
+                        [
+                            "first_name",
+                            "class" => "form-control",
+                            "value" => $user->first_name
+                         ]
+                         ); ?>
+                </div>
+                <div class="col-lg-4">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <label for="last_name"> <b>Your Last Name:</b></label>
+                </div>
+                <div class="col-lg-3">
+                <?php echo $this->tag->textField(
+                        [
+                            "last_name",
+                            "class" => "form-control",
+                            "value" => $user->last_name
+                         ]
+                         ); ?>
+                </div>
+                <div class="col-lg-4">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <label for="password"> <b>Password:</b></label>
+                </div>
+                <div class="col-lg-3">
+                <?php echo $this->tag->passwordField(
+                        [
+                            "password",
+                            "class" => "form-control",
+                            "value" => $user->password
+                         ]
+                         ); ?>
+                </div>
+                <?php echo $this->tag->hiddenField(
+                        [
+                            "id",
+                            "value" => $user->id
+                         ]
+                         ); ?>
+                <div class="col-lg-4">
+
+                </div>
+            </div>
+       
+
+            <?php echo $this->tag->submitButton(
+                        [
+                            "name" => "update",
+                            "class" => "btn btn-primary",
+                            "value" => "Update"
+                         ]
+                         ); ?>
+            <div class="nav-item text-nowrap">
+                <?php echo $this->tag->linkTo(["user/signout","Sign Out"]) ?>
+            </div>
+        </form>
+    </div>
+
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./assets/js/dUser.js"></script>
+    </div>
+    </div>
+    </div>
+</body>

@@ -1,0 +1,22 @@
+<div class="container py-5 my-5">
+    <div class="row text-center">
+        
+              <?php $len = count($data) ;
+                    if($data[$len-1])
+                    {
+                        ?><div class="col bg-success"> <p><?php echo("Order Placed Successfully"); 
+                        header('Refresh: 3; URL=http://localhost:8080/products');
+                        $this->session->remove('cart');
+                        ?> </p>  </div>  <?php 
+                    } else {
+                        ?><div class="col bg-danger"> <p><?php echo("There was some error");
+                        header('Refresh: 3; URL=http://localhost:8080/products/addCart');
+                        $this->session->remove('cart');
+                        ?> </p>  </div>  <?php 
+                    }
+              
+              
+              ?>
+        
+    </div>
+</div>
