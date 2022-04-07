@@ -125,12 +125,17 @@ class AdminController extends Controller
            {
                  $res = $this->request->getPost();
                  $img  = $this->request->getUploadedFiles();
-                  $imgName = $img[0]->getname();   
+                //  echo "<pre>";
+                //  print_r($img);
+                //  die;
+                  $imgName = $img[0]->getname(); 
+                  echo $img[0]->getTempname()." "; 
+                  echo($imgName);
                   $product = new Products();
                   $res["product_image"] = $imgName ;
                   
                   $escaper = new Escaper();
-                  $escaper->escapeHtml($title);
+                //  $escaper->escapeHtml($title);
 
                   $escInput = array(
                      "product_name" => $escaper->escapeHtml($res["product_name"]),
@@ -149,9 +154,12 @@ class AdminController extends Controller
                         'product_image'
                     ]
                 ); 
+                move_uploaded_file($img[0]->getTempname(), "../public/images/$imgName");
+
                 $success = $product->save();
               if($success)
               {
+                
                  $this->response->redirect("admin/products");
               } else {
                  // $message = "There was some error";
@@ -174,17 +182,21 @@ class AdminController extends Controller
     {
         $id = $this->request->getPost()["chId"];
         $st = $this->request->getPost()["status"];
-        
+      //  die($st);
         $all = Users::findFirst($id); //finding user by id
+        // print_r(json_encode($all));
+        // die;
         if($st == "approved")
         {
+           // die($all->status);
             $all->status = 'pending';
         } 
         else 
         {
             $all->status = 'approved'; 
         }
-        $all->update();
+        $all->save();
+        
         $this->response->redirect("admin");
     }
 
@@ -201,6 +213,7 @@ class AdminController extends Controller
         {
             $products =  Products::findFirst($id); //finding products by id
             $products->delete();
+            unlink("../public/images/$products->product_image");
             $this->response->redirect("admin/products");  
         }
         else if($useFor == "Users")
